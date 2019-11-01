@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("LinKHub", "Index", "Home", new { area = "Common" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!--Links that are availble for anynomous users-->
+                    @Html.ActionLink("Home", "Index", new { Controller = "Home", area = "Common" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("BrowseURLs", "Index", new { Controller = "BrowseURLs", area = "Common" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Registor", "Index", new { Controller = "Registor", area = "Security" }, new { @class = "navbar-brand" })
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                      
+                        @Html.ActionLink("Category", "Index", new { Controller = "Category", area = "Admin" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("ListCategory", "Index", new { Controller = "ListCategory", area = "Admin" }, new { @class = "navbar-brand" })
+
+                        @Html.ActionLink("Submit URL", "Index", new { Controller = "URL", area = "User" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Approve URL", "Index", new { Controller = "ApproveURLs", area = "Admin" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("ListUsers", "Index", new { Controller = "ListUser", area = "Admin" }, new { @class = "navbar-brand" })
+
+                        @Html.ActionLink("SignOut", "SignOut", new { Controller = "Login", area = "Security" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login", "Index", new { Controller = "Login", area = "Security" }, new { @class = "navbar-brand" })
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
